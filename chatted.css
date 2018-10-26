@@ -1,0 +1,70 @@
+body, h1{
+	background-color:white;
+	color:#222;
+	font-style:Arial;
+	border: 2px solid black;
+	margin: 20px;
+	z-index:10;
+	right:10px;
+	top:20px;
+	text-align:relative;
+}
+
+form, p, span {
+    margin:0;
+    padding:0; }
+  
+input { font:12px arial; }
+
+#chatbox {
+    text-align:left;
+    margin:0 auto;
+    margin-bottom:25px;
+    padding:10px;
+    background:#fff;
+    height:270px;
+    width:430px;
+    border:1px solid black;
+    overflow:auto; }
+	
+	#usermsg {
+    width:380px;
+    border:1px solid black;
+	position:center;
+	}
+	
+	#submitmsg { 
+	width: 60px; 
+	}
+	
+	#namebox{
+		border:1px solid black;
+		margin: auto;
+		margin-bottom:30px;
+		padding:20px;
+		overflow:auto;
+		background:#fff;
+		height:250px;
+		width:100px;
+		right:1px;
+		bottom:160px;
+		top:1px;
+		left:700px;
+		position:absolute;
+	}
+
+#thread {
+	border:1px solid black;
+		margin: auto;
+		margin-bottom:30px;
+		padding:20px;
+		overflow:auto;
+		background:#fff;
+		 height:190px;
+         width:200px;
+		 position:absolute;
+		 left:90px;
+		 top:20px;
+		 bottom:190px;
+		 right:`100px;
+}	

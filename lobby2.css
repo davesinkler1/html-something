@@ -1,0 +1,23 @@
+h2,h1 {
+	text-align: center;
+	}
+
+div {
+	border: 2px solid black;
+	margin: 20px;
+	z-index: 10;
+	border-right-style:none;
+	border-top-style:none;
+	border-left-style:none;
+	width: 200px;
+}
+
+body {
+	background-color: white;
+}
+
+table, th, td {
+	border: 1px solid black;
+  font-family: Times, sans-serif;
+  text-align: center;
+}
