@@ -1,0 +1,45 @@
+.chatsection {
+	float: left;
+	border: 2px solid black;
+	width: 500px;
+	height: 500px;
+	padding: 20px;
+	margin: 0 auto;
+}
+
+.whitepage { 
+	float: left;
+	position: relative;
+	border: 2px solid black;
+	width: 500px;
+	height: 500px;
+	padding: 20px;
+}
+
+#mic {
+ position: absolute;
+ float: left;
+ bottom: 40;
+width:5%;
+height:5%;
+}
+
+#image {
+left: 50;
+position: absolute;
+bottom: 40;
+float:left;
+width:5%;
+height:5%;
+}
+
+#chatform {
+	position: absolute;
+	float: left;
+	bottom: 0;
+	left: 0;
+	width: 500px;
+}
+
+
+
