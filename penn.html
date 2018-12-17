@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="new.css">
-<title>penn and paper</title>
-<body background=>
-<table>
-<th>Servers:<br></th>
-<td><a href="lobby.html" >Lobby </a></td>
-<td><a href="news.html">News </a></td>
-<td><a href="chat.html">Chat </a></td>
-</table>
-<h1><b>PENN AND PAPER</b></h1>
-<p font = "Times New Roman">This is pretty much a website about playing tabletop RPG, like a pen and paper one where you have a GM and you fills out character sheets yeah, that one i have NEVER played any type of tabletop RPG since the necessary guide books and dices is rare in my country so, i want people to play tabletop RPG freely here.</p>
-<div id = "experience">
-<h3>EXPERIENCE</h2>
-<p font = "Times New Roman">I do not have any experience with tabletop RPG i do collect w40k miniatures but i have never played them. i also do not know how to play these kinds of tabletop RPG like, i do know how to read the dices a little bit but i don't knwo how to go beyond that point. (if you want to know how to play these tabletop RPGs just go to google or something)</p>
-</div>
-<div id = "signup">
-<h3>SIGNING UP</h3>
-<p font = "Times New Roman"> Since you're gonna play with different people you need to make an account, you could sign up below or if you're too lazy to set up a nickname you could just be a guest</p>
-</div>
+	<link rel="stylesheet" href="new.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>penn and paper</title>
+	<body background=>
+	<div id="nav">
+		<a href="lobby.php" >Lobby </a>
+		<a href="news.html">News </a>
+		<a href="transition.php">Chat </a>
+	</div>
+	<h1 class="title"><b>PENN AND PAPER</b></h1>
+
+	<div class ="box">
+		<p font = "Times New Roman">This is pretty much a website about playing tabletop RPG, like a pen and paper one where you have a GM and you fills out character sheets yeah, that one i have NEVER played any type of tabletop RPG since the necessary guide books and dices is rare in my country so, i want people to play tabletop RPG freely here.</p>
+		<h3>EXPERIENCE</h2>
+		<p font = "Times New Roman">I have little experience with tabletop RPG i do collect w40k miniatures but i have never played them.</p>
+		<h3>SIGNING UP</h3>
+		<p font = "Times New Roman"> Since you're gonna play with different people you need to make an account, you could sign up below or if you're too lazy to set up a nickname you could just be a guest</p>
+		</div>
 <div id = "form">
-<form>
+<form action="lobby.php" method="post" >
 Username:<br>
 <input type="text" name="username">
 <br><br>
-<input type="submit" name="submit">
-<button type="button">
+<input type="submit" name="submit" value="Submit">
+<input type="submit" name="Guest" value="Guest">
+
 </form>
 </body>
 </html>
