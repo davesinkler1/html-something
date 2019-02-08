@@ -12,7 +12,7 @@
 	<h1 class="title"><b>PENN AND PAPER</b></h1>
 
 	<div class ="box">
-		<p font = "Times New Roman">This is pretty much a website about playing tabletop RPG, like a pen and paper one where you have a GM and you fills out character sheets yeah, that one i have NEVER played any type of tabletop RPG since the necessary guide books and dices is rare in my country so, i want people to play tabletop RPG freely here.</p>
+		<p font = "Times New Roman">This is pretty much a website about playing tabletop RPG, like a pen and paper one where you have a GM and you fills out character sheets yeah, that one i have played a little tabletop RPG since the necessary guide books and dices is rare in my country so, i want people to play tabletop RPG freely here.</p>
 		<h3>EXPERIENCE</h2>
 		<p font = "Times New Roman">I have little experience with tabletop RPG i do collect w40k miniatures but i have never played them.</p>
 		<h3>SIGNING UP</h3>

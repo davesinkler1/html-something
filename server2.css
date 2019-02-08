@@ -26,18 +26,18 @@ height:5%;
 
 
 #uploadfile {
-left: 50;
 position: absolute;
 bottom: 10;
+right: 3;
 float:left;
-width:100%;
+width:50%;
 height:10%;
 }
 
 #submit {
-	left: 230;
 position: absolute;
 bottom: 40;
+right: 3;
 float:left;
 width:10%;
 height:5%;
@@ -46,9 +46,9 @@ height:5%;
 #playernotesone {
 position: absolute;
 	float: left;
-	bottom: 40px;
-	left: 10px;
-	width: 500px;	
+	bottom: 40;
+	left: 10;
+	width: 540px;	
 }
 
 #chatform {
@@ -56,7 +56,13 @@ position: absolute;
 	float: left;
 	bottom: 0;
 	left: 0;
-	width: 500px;
+	width: 540px;
+}
+
+#testbox {
+	border: 2px solid black;
+	width: 98%;
+	height: 35%
 }
 
 .dicebox {
@@ -67,3 +73,24 @@ position: absolute;
   height: 10%;  
 }
 
+.videoContainer {              
+  object-fit: cover;           
+  margin: 0 auto;              
+  padding: 0;                  
+}                              
+
+.videoContainer video {        
+  width: 30%;                 
+  height: 20%;                
+  border-radius: 10px;         
+  border: 5px double #f2f2f2;  
+}                              
+
+.volume {                      
+  position: absolute;          
+  left: 15%;                   
+  width: 70%;                  
+  bottom: 20px;                
+  height: 10px;                
+  display: none;               
+}                              
