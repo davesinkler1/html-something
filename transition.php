@@ -6,11 +6,20 @@ function userform() {
 Username:<br>
 <input type="text" name="username">
 <br><br>
+<input type="button" name="id" onclick="ID()" value="Generate ID">
+<p id="output" name="output"></p>
 <input type="submit" name="submit" value="Submit">
-<input type="submit" name="Guest" value="Guest">
 </form>
 </div>';
 }
+
+echo '<script>var ID = function() {
+	 var x = "_" + Math.random().toString(36).substr(2, 9)
+	 document.getElementById("output").innerHTML = x
+	 localStorage.setItem("x", x)
+	 var y = localStorage.getItem("x")
+	 console.log(y)
+}</script>';
 
 if (isset($_POST['submit'])){
 	if (isset($_POST['username'])){
@@ -33,14 +42,15 @@ if (isset ( $_GET ['logout'] )) {
 	  fwrite ( $fp, "<div class='msgln'><i>User Guest has left the chat session.</i><br></div>" );
     fclose ( $fp );
     session_destroy ();
-    header ( "Location: index.php" );
+    header ( "Location: transition.php" );
 }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" href="chatted.css">
+<title>General</title>
+<link rel="stylesheet" href="/css/chatted.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h1 class="title">Chatroom</h1>
 </head>
@@ -50,33 +60,62 @@ if (isset ( $_GET ['logout'] )) {
         userform ();
     } else {
         ?>
-<div id="wrapper">
-        <div id="menu">
-            <p class="welcome">
+<div id="top_part">
+		 <p class="welcome">
                 Welcome, <b><?php echo $_SESSION['username']; ?></b>
+				(<b id="number_id"><?php echo'<script>y=localStorage.getItem("x");document.getElementById("number_id").innerHTML = y;console.log(y);</script>'?></b>)
             </p>
-            <p class="logout">
-                <a id="exit" href="#">Exit Chat</a>
+			<br>
+			  <p class="logout">
+                <a id="exit" href="penn.php">Exit Chat</a>
             </p>
+			</div>
+			<br><br>
+			<div id="threadbox">
+			<button type="button" id="gchess" onclick="ChangeLocation()">Gchess</button>
+			</div>
+			<div id="wrapper">
+		<div id="menu">
             <div style="clear: both"></div>
         </div>
-        <div id="chatbox"><?php
+	<div id="chatbox">
+		<?php
         if (file_exists ( "log.html" ) && filesize ( "log.html" ) > 0) {
             $handle = fopen ( "log.html", "r" );
             $contents = fread ( $handle, filesize ( "log.html" ) );
             fclose ( $handle );
             echo $contents;
         }
-        ?></div>
-
+        ?>
+	</div>
+    <div id="send_message">
         <form name="message" action="">
-            <input name="usermsg" type="text" id="usermsg" size="63" /> <input
-                name="submitmsg" type="submit" id="submitmsg" value="Send" />
+            <input name="usermsg" type="text" id="usermsg" size="63" />
+			<input name="submitmsg" type="submit" id="submitmsg" value="Send" />
         </form>
-    </div>
+	</div>
     <script type="text/javascript"
         src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
     <script type="text/javascript">
+	generalc = document.getElementById("gchess")
+	
+	function ChangeLocation() {
+		location.replace('http://localhost/gchess.php')
+	}
+	
+	/*window.addEventListener('popstate', function(event){
+		console.log('popstate fired!')
+		updateContent(event.state);
+	})*/
+
+/*generalc.addEventListener("click", function(){
+	event.preventDefault();
+	window.history.pushState({urlPath:'http://localhost/gchess.php'},"",'http://localhost/gchess.php');
+	return false
+});*/
+
+//if{
+
 // jQuery Document
 $(document).ready(function(){
 });

@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html>
-	<link rel="stylesheet" href="new.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
 	<title>penn and paper</title>
-	<body background=>
+	<link rel="stylesheet" type="text/css" href="/css/new.css">
+</head>
+<body>
 	<div id="nav">
 		<a href="lobby.php" >Lobby </a>
 		<a href="news.html">News </a>
@@ -12,31 +18,43 @@
 	<h1 class="title"><b>PENN AND PAPER</b></h1>
 
 	<div class ="box">
-		<p font = "Times New Roman">This is pretty much a website about playing tabletop RPG, like a pen and paper one where you have a GM and you fills out character sheets yeah, that one i have played a little tabletop RPG since the necessary guide books and dices is rare in my country so, i want people to play tabletop RPG freely here.</p>
-		<h3>EXPERIENCE</h2>
-		<p font = "Times New Roman">I have little experience with tabletop RPG i do collect w40k miniatures but i have never played them.</p>
-		<h3>SIGNING UP</h3>
-		<p font = "Times New Roman"> Since you're gonna play with different people you need to make an account, you could sign up below or if you're too lazy to set up a nickname you could just be a guest</p>
-		</div>
+	    <h2>WHAT THE FLIP IS THIS</h2>
+		<p font = "Times New Roman" id="wtf">This is pretty much a website about playing board games in general.</p>
+		<h2>BACKGROUND</h2>
+		<p font = "Times New Roman" id="background">Why did i make this? because i was board.</p>
+		<h2 id="sign_title">SIGNING UP</h2>
+		<p font = "Times New Roman" id="sign_in"> Since you're gonna play with different people you need to make an account, you could sign up below or if you're too lazy to set up a nickname you could just be a gues
+	</div>
 <div id = "form">
 <?php
-echo '<form action="lobby.php" method="post" >
+echo '<form action="transition.php";action="lobby.php" method="post" id="form2">
 Username:<br>
-<input type="text" name="username">
+<input type="text" name="username">';
+echo'
 <br><br>
+<input type="button" name="id" onclick="ID()" value="Generate ID">
+<p id="output" name="output"></p>
 <input type="submit" name="submit" value="Submit">
-<input type="submit" name="Guest" value="Guest">
-
 </form>';
 echo '<br><br>';
-echo '<form action="transition.php" method="post" >
+
+/* echo '<form action="transition.php" method="post" >
 Username(for chat):<br>
 <input type="text" name="username">
 <br><br>
 <input type="submit" name="submit" value="Submit">
 <input type="submit" name="Guest" value="Guest">
 
-</form>';
+</form>'; */
 ?>
 </body>
+<script>
+var ID = function() {
+	 var x = '_' + Math.random().toString(36).substr(2, 9);
+	 document.getElementById("output").innerHTML = x;
+	 localStorage.setItem("x", x)
+	 var y = localStorage.getItem("x")
+	 console.log(y)
+}
+</script>
 </html>
