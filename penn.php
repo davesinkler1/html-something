@@ -27,9 +27,9 @@ session_start();
 	</div>
 <div id = "form">
 <?php
-echo '<form action="transition.php";action="lobby.php" method="post" id="form2">
+echo '<form action="lobby.php";action="transition.php" method="post" id="form2">
 Username:<br>
-<input type="text" name="username">';
+<input type="text" name="username" required>';
 echo'
 <br><br>
 <input type="button" name="id" onclick="ID()" value="Generate ID">

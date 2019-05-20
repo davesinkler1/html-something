@@ -10,7 +10,6 @@ Username:<br>
 <input type="radio" name="black" value="black piece"><br>
 <input type="radio" name="white" value="white piece"><br>
 <input type="submit" name="submit" value="Submit">
-<input type="submit" name="Guest" value="Guest">
 </form>
 </div>';
 }
@@ -39,9 +38,11 @@ if(isset($_SESSION['submit'])){
             </p>
 	     <link rel="stylesheet" href="/css/server2.css">
 		  <link rel="stylesheet" href="css/chessboard-0.3.0.min.css">
+		  <script src="custombg/js/jquery/jquery.min.js"></script>
+		   <script src="custombg/js/jquery/jquery-ui.min.js"></script>
 		<script src="https://webrtc.github.io/adapter/adapter-4.2.2.js"></script>
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-		   <script src="js/chessboard-0.3.0.min.js"></script>
+		   <script src="js/chessboard.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
 	</head>
 
@@ -52,20 +53,94 @@ if(isset($_SESSION['submit'])){
 	<br><br><br><br>
 	 <div id='turn'> It's Whites turn!</div>
 	 </div>
- 	 <script>
+
+
+<script>
+	var board,
+		 game = new Chess();
+		  statusEl = $('#status'),
+		  fenEl = $('#fen'),
+		  pgnEl = $('#pgn');
+
+		var onDragStart = function(source, piece, position, orientation) {
+	  if (game.game_over() === true ||
+		  (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+		  (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+		return false;
+	  }
+	};
+
+	var onDrop = function(source, target) {
+	  // see if the move is legal
+	  var move = game.move({
+		from: source,
+		to: target,
+		promotion: 'q' // NOTE: always promote to a queen for example simplicity
+	  });
+
+	  // illegal move
+	  if (move === null) return 'snapback';
+
+	  updateStatus();
+	};
+
+	// update the board position after the piece snap 
+	// for castling, en passant, pawn promotion
+	var onSnapEnd = function() {
+	  board.position(game.fen());
+	};
+
+	var updateStatus = function() {
+	  var status = '';
+
+	  var moveColor = 'White';
+	  if (game.turn() === 'b') {
+		moveColor = 'Black';
+	  }
+
+	  // checkmate?
+	  if (game.in_checkmate() === true) {
+		status = 'Game over, ' + moveColor + ' is in checkmate.';
+	  }
+
+	  // draw?
+	  else if (game.in_draw() === true) {
+		status = 'Game over, drawn position';
+	  }
+
+	  // game still on
+	  else {
+		status = moveColor + ' to move';
+
+		// check?
+		if (game.in_check() === true) {
+		  status += ', ' + moveColor + ' is in check';
+		}
+	  }
+
+	  statusEl.html(status);
+	  fenEl.html(game.fen());
+	  pgnEl.html(game.pgn());
+	};
+
 	 var cfg = {
-		 draggable: true,
-		 position: 'start'
-	 };
-	 
-	 var board = ChessBoard('board1', cfg);
-	 </script>
+			 draggable: true,
+			 onDragStart: onDragStart,
+			 onDrop: onDrop,
+			 onSnapEnd: onSnapEnd,
+			 dropOffBoard: 'snapback',
+			 position: 'start'
+		 };
+		 
+		 ChessBoard('board1', cfg);
+		 
+	updateStatus(); 
+</script>
 		
 	</div>
 	
 	<div id="options-window" class="fg-creamy bg-lightgrey"></div>
 	<div class="whitepage">
-		<div id="chatform">
 			<?php
 				if (file_exists ( "serverlog.html" ) && filesize ( "serverlog.html" ) > 0) {
 					$handle = fopen ( "serverlog.html", "r" );
@@ -74,7 +149,6 @@ if(isset($_SESSION['submit'])){
 					echo $contents;
 				}
 			?>
-		</div>
 		<!--<div id="photoform">-->
 		<form action="upload4.php" method="post" enctype="multipart/form-data" id="myform">
 		<!--<div class='preview'>
@@ -89,13 +163,13 @@ if(isset($_SESSION['submit'])){
 					echo $contents;
 				}*/
 			?>
-		<div id="buttons">
-			<input type="button" style="visibility:solid;" onClick="loadOptionsWindow('custombg/options-window.html')" value="Edit background" class="custombg">
-			<input type="file" name="uploadfile" multiple></input> 
-			<input type="submit" name="submit" value="submit" id="submit"></input>
-			<input type="submit" name="postimage" value="submitimg" id="postimage"></input>
-		</div>
 		</form>
+	<div id="buttons" onclick="loadOptionsWindow()">
+	<input type="file" id="uploadfile" name="uploadfile">
+	<input type="submit" id="submit" name="submit">
+	<input type="button" value="Change Background" onclick="loadOptionsWindow()">
+	</div>
+	<script type="text/javascript" src="custombg/js/custombg-loader.js"></script>
 	</div>
 		<div id="imgmessage">
 		</div>
@@ -115,7 +189,7 @@ if(isset($_SESSION['submit'])){
 $("#myform").on('postimage',(function(e){
 e.preventDefault();
 $.ajax({
-url: "upload2.php",
+url: "upload4.php",
 type: "POST",
 data:  new FormData(this),
 contentType: false,
