@@ -17,6 +17,10 @@ const io = socket(server)
 // keep track of how many players in a game (0, 1, 2)
 var players;
 
+var joined = true;
+
+app.use(express.static(__dirname + "/"));
+
 // create an array of 100 games and initialize them
 var games = Array(100);
 for (let i = 0; i < 100; i++) {
@@ -24,7 +28,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 app.get('/', (req, res) => {
-   res.sendFile(__dirname + '/chesserver.php');
+   res.sendFile(__dirname + '/chesstest.html');
 });
 
 io.on('connection', function (socket) {
@@ -32,15 +36,14 @@ io.on('connection', function (socket) {
  // just assign a random number to every player that has connected
  // the numbers have no significance so it
  // doesn't matter if 2 people get the same number
- y=localStorage.getItem("x")
- console.log(y + ' connected');
+ var color; // black or white
+ var x = '_' + Math.random().toString(36).substr(2, 9);
+ console.log(x + ' connected');
 
  // if a user disconnects just print their playerID
  socket.on('disconnect', function () {
-   console.log(y + ' disconnected');
+   console.log(x + ' disconnected');
  });
- 
- var color; // black or white
 
 // 'joined' is emitted when the player enters a room number and clicks
 // the connect button the room ID that the player entered gets passed as a message
@@ -49,7 +52,7 @@ socket.on('joined', function (roomId) {
  // if the room is not full then add the player to that room
  if (games[roomId].players < 2) {
      games[roomId].players++;
-     games[roomId].pid[games[roomId].players - 1] = playerId;
+     games[roomId].pid[games[roomId].players - 1] = x;
  } // else emit the full event
  else{
      socket.emit('full', roomId)
@@ -63,7 +66,7 @@ socket.on('joined', function (roomId) {
 
  // this is an important event because, once this is emitted the game
  // will be set up in the client side, and it'll display the chess board
- socket.emit('player', { playerId, players, color, roomId })
+ socket.emit('player', { x, players, color, roomId })
 
 });
 
@@ -82,10 +85,23 @@ socket.on('play', function (msg) {
 // when the user disconnects from the server, remove him from the game room
 socket.on('disconnect', function () {
  for (let i = 0; i < 100; i++) {
-     if (games[i].pid[0] == playerId || games[i].pid[1] == playerId)
+     if (games[i].pid[0] == x || games[i].pid[1] == x)
          games[i].players--;
  }
- console.log(playerId + ' disconnected');
+ console.log(x + ' disconnected');
 
 });
+
+socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
+  
+   socket.on('new_message', (data) => {
+        io.sockets.emit('new_message', {message : data.message, username : socket.username});
+    })
 });
+
+});
+
+server.listen(port);
+console.log('Connected');
