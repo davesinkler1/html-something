@@ -12,12 +12,16 @@ Prerequisites
 <p>
 the chess.js library:
 npm install --save chess.js
+</p>
+<p>
 chessboardjs:
 npm install @chrisoakman/chessboardjs
+</p>
+<p>
 socket.io:
 npm install socket.io
 </p>
-...
+
 
 Deployment
 ==========
@@ -25,6 +29,5 @@ For deployment what i used was XAAMP and node
 to run index.js.
 
 Run index.js using this command:
-...
+
 <p>node index.js</p>
-...
