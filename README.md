@@ -8,7 +8,7 @@ thing it will hosts is chess because i don't have the time to develop it
 
 Prerequisites
 =============
-...
+
 <p>
 the chess.js library:
 npm install --save chess.js
