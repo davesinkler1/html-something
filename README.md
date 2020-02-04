@@ -11,7 +11,7 @@ Prerequisites
 
 <p>
 the chess.js library:
-`npm install --save chess.js`
+npm install --save chess.js
 </p>
 <p>
 chessboardjs:
